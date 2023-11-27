@@ -19,11 +19,11 @@ class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
       printer: PrettyPrinter(),
     );
     var containsEncryptionKey = await secureStorage.read(key: 'encryptionKey');
-    logger.i(containsEncryptionKey);
+
     if (containsEncryptionKey != null) {
+      logger.i(containsEncryptionKey);
       var key = Hive.generateSecureKey();
-      await secureStorage.write(
-          key: 'encryptionKey', value: base64UrlEncode(key));
+      await secureStorage.write(key: 'encryptionKey', value: base64Encode(key));
     }
   }
 }
