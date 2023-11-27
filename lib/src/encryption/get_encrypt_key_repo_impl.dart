@@ -14,9 +14,8 @@ class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
     final FlutterSecureStorage secureStorage = FlutterSecureStorage(
       aOptions: _getAndroidOptions(),
     );
-    var containsEncryptionKey =
-        await secureStorage.containsKey(key: 'encryptionKey');
-    if (!containsEncryptionKey) {
+    var containsEncryptionKey = await secureStorage.read(key: 'encryptionKey');
+    if (containsEncryptionKey != null) {
       var key = Hive.generateSecureKey();
       await secureStorage.write(
           key: 'encryptionKey', value: base64UrlEncode(key));
