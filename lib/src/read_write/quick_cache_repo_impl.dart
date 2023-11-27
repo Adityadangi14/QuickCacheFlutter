@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:quick_cache_flutter/src/global_box/global_box.dart';
-import 'package:quick_cache_flutter/src/quick_cache_repo.dart';
+import 'package:quick_cache_flutter/src/read_write/quick_cache_repo.dart';
 
 class QuickCacheRepoImpl implements QuickCacheRepo {
   @override

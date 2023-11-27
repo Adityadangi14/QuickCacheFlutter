@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
-import 'package:quick_cache_flutter/src/get_encryt_key_repo.dart';
-import 'package:quick_cache_flutter/src/init.dart';
-import 'package:quick_cache_flutter/src/strings/strings.dart';
+import 'package:quick_cache_flutter/src/encryption/get_encryt_key_repo.dart';
 
-class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo  {
+class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
         encryptedSharedPreferences: true,
       );
@@ -23,7 +21,5 @@ class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo  {
       await secureStorage.write(
           key: 'encryptionKey', value: base64UrlEncode(key));
     }
-    
   }
-
 }
