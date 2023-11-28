@@ -10,10 +10,12 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
 
       Map value = encryptedBox.get(key);
 
-      if (DateTime.parse(value['currentDateTime'])
-          .add(value['expiryDuration'])
-          .isAfter(DateTime.now())) {
-        return null;
+      if (value['expiryDuration'] != null) {
+        if (DateTime.now().isBefore(DateTime.parse(value["expiryDuration"]))) {
+          return null;
+        } else {
+          return encryptedBox.get(key["value"]);
+        }
       } else {
         return encryptedBox.get(key["value"]);
       }
@@ -30,7 +32,8 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
 
       encryptedBox.put(key, {
         "value": value,
-        "expiryDuration": expiryDuration,
+        "expiryDuration":
+            expiryDuration != null ? DateTime.now().add(expiryDuration) : null,
         "currentDateTime": DateTime.now()
       });
     } catch (e) {
