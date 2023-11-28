@@ -3,22 +3,19 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:quick_cache_flutter/src/encryption/get_encryt_key_repo.dart';
+import 'package:quick_cache_flutter/src/get_secure_storage_instance.dart';
 
 class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
-  AndroidOptions _getAndroidOptions() => const AndroidOptions(
-        encryptedSharedPreferences: true,
-      );
-
   @override
   void storeCypher() async {
-    final FlutterSecureStorage secureStorage = FlutterSecureStorage(
-      aOptions: _getAndroidOptions(),
-    );
-    var containsEncryptionKey = await secureStorage.read(key: 'encryptionKey');
+    var containsEncryptionKey = await GetSecureStorageInstance
+        .instance.secureStorage
+        .read(key: 'encryptionKey');
 
     if (containsEncryptionKey == null) {
       var key = Hive.generateSecureKey();
-      await secureStorage.write(key: 'encryptionKey', value: base64Encode(key));
+      await GetSecureStorageInstance.instance.secureStorage
+          .write(key: 'encryptionKey', value: base64Encode(key));
     }
   }
 }
