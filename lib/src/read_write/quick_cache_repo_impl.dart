@@ -14,10 +14,10 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
         if (DateTime.now().isBefore(DateTime.parse(value["expiryDuration"]))) {
           return null;
         } else {
-          return encryptedBox.get(key["value"]);
+          return value['value'];
         }
       } else {
-        return encryptedBox.get(key["value"]);
+        return value['value'];
       }
     } catch (e) {
       throw (e);
