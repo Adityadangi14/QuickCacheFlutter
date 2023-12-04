@@ -12,6 +12,7 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
 
       if (value['expiryDuration'] != null) {
         if (DateTime.now().isAfter(value["expiryDuration"])) {
+          encryptedBox.delete(key);
           return null;
         } else {
           return value['value'];
@@ -20,7 +21,7 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
         return value['value'];
       }
     } catch (e) {
-      throw (e);
+      rethrow;
     }
   }
 
@@ -37,7 +38,7 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
         "currentDateTime": DateTime.now()
       });
     } catch (e) {
-      throw (e);
+      rethrow;
     }
   }
 }
