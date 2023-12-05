@@ -8,12 +8,12 @@ class QuickCacheFlutter extends QuickCacheRepoImpl {
 
   static final instance = QuickCacheFlutter._();
 
-  void init() {
-    GetEncryptKeyRepo getEncryptKeyRepo = getIt<GetEncryptKeyRepo>();
-
-    GlobalBox globalBox = getIt<GlobalBox>();
+  QuickCacheFlutter() {
     setup();
-    getEncryptKeyRepo.storeCypher();
+  }
+
+  void init() {
+    getIt<GetEncryptKeyRepo>().storeCypher();
     globalBox.getGlobalBox();
   }
 }
