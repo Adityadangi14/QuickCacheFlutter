@@ -3,6 +3,7 @@ part of 'locator_import.dart';
 GetIt getIt = GetIt.instance;
 
 void setup() {
+  getIt.registerSingleton(GetEncryptKeyRepo);
   // global box
 
   getIt.registerSingleton(GlobalBox());
