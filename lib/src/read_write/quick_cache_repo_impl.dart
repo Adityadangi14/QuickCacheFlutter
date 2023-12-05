@@ -5,6 +5,10 @@ import 'package:quick_cache_flutter/src/read_write/quick_cache_repo.dart';
 
 class QuickCacheRepoImpl implements QuickCacheRepo {
   GlobalBox globalBox = getIt<GlobalBox>();
+
+  QuickCacheRepoImpl() {
+    setup();
+  }
   @override
   dynamic readCache({required key}) async {
     try {
