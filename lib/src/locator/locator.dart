@@ -12,7 +12,7 @@ void setup() {
   getIt.registerSingleton(GetSecureStorageInstance());
 
   //Get encryption box
-
+  getIt.registerSingleton(GetEncryptKeyRepo);
   getIt.registerSingleton<GetEncryptKeyRepo>(GetEncryptKeyRepoImpl());
 
   // read write cache
