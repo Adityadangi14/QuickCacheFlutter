@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hive/hive.dart';
 import 'package:quick_cache_flutter/src/global_box/global_box.dart';
 
@@ -16,10 +18,10 @@ class QuickCacheRepoImpl with GlobalBox implements QuickCacheRepo {
           encryptedBox.delete(key);
           return null;
         } else {
-          return value['value'];
+          return json.decode(value['value']);
         }
       } else {
-        return value['value'];
+        return json.decode(value['value']);
       }
     } catch (e) {
       rethrow;
@@ -33,7 +35,7 @@ class QuickCacheRepoImpl with GlobalBox implements QuickCacheRepo {
       Box encryptedBox = await getGlobalBox();
 
       encryptedBox.put(key, {
-        "value": value,
+        "value": json.encode(value),
         "expiryDuration":
             expiryDuration != null ? DateTime.now().add(expiryDuration) : null,
         "currentDateTime": DateTime.now()
