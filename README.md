@@ -4,14 +4,15 @@
 Manage your cache  securely with a single line of code , without sacrificing performance.
 ## Features
 
-⚡ Fast - uses Hive underneath for peak performance.
+⚡ Fast - uses [Hive](https://pub.dev/packages/hive) underneath for peak performance.
+
 🔒 Secure - Encrypts everything you save.
+
 😉 Easy to use - single line read write.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+
 
 ## Usage
 
