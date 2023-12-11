@@ -5,11 +5,11 @@ import 'package:quick_cache_flutter/src/global_box/global_box.dart';
 
 import 'package:quick_cache_flutter/src/read_write/quick_cache_repo.dart';
 
-class QuickCacheRepoImpl with GlobalBox implements QuickCacheRepo {
+class QuickCacheRepoImpl implements QuickCacheRepo {
   @override
   dynamic readCache({required key}) async {
     try {
-      Box encryptedBox = await getGlobalBox();
+      Box encryptedBox = await GlobalBox.instance.getGlobalBox();
 
       Map value = encryptedBox.get(key);
 
@@ -32,7 +32,7 @@ class QuickCacheRepoImpl with GlobalBox implements QuickCacheRepo {
   void setCache(
       {required key, required value, Duration? expiryDuration}) async {
     try {
-      Box encryptedBox = await getGlobalBox();
+      Box encryptedBox = await GlobalBox.instance.getGlobalBox();
 
       encryptedBox.put(key, {
         "value": json.encode(value),

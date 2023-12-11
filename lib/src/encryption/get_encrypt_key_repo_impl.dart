@@ -4,7 +4,11 @@ import 'package:hive/hive.dart';
 import 'package:quick_cache_flutter/src/encryption/get_encryt_key_repo.dart';
 import 'package:quick_cache_flutter/src/get_secure_storage_instance.dart';
 
-mixin class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
+class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
+  GetEncryptKeyRepoImpl._();
+
+  static final instance = GetEncryptKeyRepoImpl._();
+
   GetSecureStorageInstance getSecureStorageInstance =
       GetSecureStorageInstance.instance;
 

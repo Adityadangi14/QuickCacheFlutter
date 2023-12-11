@@ -5,7 +5,11 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quick_cache_flutter/src/get_secure_storage_instance.dart';
 
-mixin class GlobalBox {
+class GlobalBox {
+  GlobalBox._();
+
+  static final instance = GlobalBox._();
+
   GetSecureStorageInstance getSecureStorageInstance =
       GetSecureStorageInstance.instance;
 
