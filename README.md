@@ -12,16 +12,18 @@ Manage your cache  securely with a single line of code , without sacrificing per
 
 ## Getting started
 
+You have to initalized ```quickCaheFlutter``` before runApp(Widget) (Call it after WidgetsFlutterBinding.ensureInitialized()):
 
+```
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await QuickCacheFlutter.instance.init();
+  runApp(const MyApp());
+}
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
 
 ## Additional information
 
