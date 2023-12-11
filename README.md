@@ -8,11 +8,13 @@ Manage your cache  securely with a single line of code , without sacrificing per
 
 🔒 Secure - Encrypts everything you save.
 
-😉 Easy to use - single line read write.
+⏲️ Expiry Duration - You can provide stale period to each key.
+
+😉 Easy to use - Single line ``read`` ``write``.
 
 ## Getting started
 
-You have to initalized ```quickCaheFlutter``` before runApp(Widget) (Call it after WidgetsFlutterBinding.ensureInitialized()):
+You have to initalized ```QuickCaheFlutter``` before runApp(Widget) (Call it after WidgetsFlutterBinding.ensureInitialized()):
 
 ```
 void main() async {
@@ -23,6 +25,7 @@ void main() async {
 ```
 
 ## Usage
+
 
 
 ## Additional information
