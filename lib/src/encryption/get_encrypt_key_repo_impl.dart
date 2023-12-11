@@ -13,7 +13,7 @@ class GetEncryptKeyRepoImpl implements GetEncryptKeyRepo {
       GetSecureStorageInstance.instance;
 
   @override
-  void storeCypher() async {
+  Future<void> storeCypher() async {
     var containsEncryptionKey =
         await getSecureStorageInstance.secureStorage.read(key: 'encryptionKey');
 
