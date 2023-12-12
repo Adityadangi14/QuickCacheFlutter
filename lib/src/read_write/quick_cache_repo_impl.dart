@@ -11,17 +11,21 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
     try {
       Box encryptedBox = await GlobalBox.instance.getGlobalBox();
 
-      Map value = encryptedBox.get(key);
+      Map? value = encryptedBox.get(key);
 
-      if (value['expiryDuration'] != null) {
-        if (DateTime.now().isAfter(value["expiryDuration"])) {
-          encryptedBox.delete(key);
-          return null;
+      if (value != null) {
+        if (value['expiryDuration'] != null) {
+          if (DateTime.now().isAfter(value["expiryDuration"])) {
+            encryptedBox.delete(key);
+            return null;
+          } else {
+            return json.decode(value['value']);
+          }
         } else {
           return json.decode(value['value']);
         }
       } else {
-        return json.decode(value['value']);
+        return null;
       }
     } catch (e) {
       rethrow;
