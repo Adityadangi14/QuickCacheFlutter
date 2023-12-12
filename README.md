@@ -45,6 +45,9 @@ QuickCacheFlutter.instance.setCache(
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Feedbacks, issues, contributions and suggestions are more than welcomed! 😁
+
+## Connect with me
+
+👉 (LinkedIn)[https://www.linkedin.com/in/aditya-dangi-b70604155/]
+👉 (X)[https://twitter.com/_aditya01010101]
