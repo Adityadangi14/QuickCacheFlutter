@@ -26,10 +26,13 @@ void main() async {
 
 ## Usage
 
-``readCache`` - Reads the value for given key
-``setCache`` - Save a sigle key value in database.
-``removeAllCache`` - Clear all cache from database.
-``deleteValue`` -Deletes a sigle value.
+📖 ``readCache`` - Reads the value for given key
+
+✍️ ``setCache`` - Save a sigle key value in database.
+
+🧹 ``removeAllCache`` - Clear all cache from database.
+
+🗑️ ``deleteValue`` -Deletes a sigle value.
 
 ## Additional information
 
