@@ -51,4 +51,4 @@ Feedbacks, issues, contributions and suggestions are more than welcomed! 😁
 
 👉 [LinkedIn](https://www.linkedin.com/in/aditya-dangi-b70604155/)
 
-👉 [X](https://twitter.com/_aditya01010101)
+👉 [X (twitter)](https://twitter.com/_aditya01010101)
