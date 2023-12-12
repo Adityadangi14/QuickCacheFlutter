@@ -44,4 +44,18 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
       rethrow;
     }
   }
+
+  @override
+  void removeAllCache() async {
+    Box encryptedBox = await GlobalBox.instance.getGlobalBox();
+
+    encryptedBox.clear();
+  }
+
+  @override
+  void deleteValue({required key}) async {
+    Box encryptedBox = await GlobalBox.instance.getGlobalBox();
+
+    encryptedBox.delete(key);
+  }
 }
