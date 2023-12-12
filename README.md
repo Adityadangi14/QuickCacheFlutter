@@ -34,6 +34,15 @@ void main() async {
 
 🗑️ ``QuickCacheFlutter.instance.deleteValue`` -Deletes a sigle value.
 
+if ``expiryDuration`` is not provided or set to ``null`` then the value will persist for app lifetime or till it is manually deleted.
+
+```
+QuickCacheFlutter.instance.setCache(
+                    key: 'key',
+                    value: value,
+                    expiryDuration: const Duration(seconds: 20));
+```
+
 ## Additional information
 
 TODO: Tell users more about the package: where to find more information, how to
