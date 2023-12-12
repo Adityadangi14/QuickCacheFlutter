@@ -26,13 +26,13 @@ void main() async {
 
 ## Usage
 
-📖 ``readCache`` - Reads the value for given key
+📖 ``QuickCacheFlutter.instance.readCache`` - Reads the value for given key
 
-✍️ ``setCache`` - Save a sigle key value in database.
+✍️ ``QuickCacheFlutter.instance.setCache`` - Save a sigle key value in database.
 
-🧹 ``removeAllCache`` - Clear all cache from database.
+🧹 ``QuickCacheFlutter.instance.removeAllCache`` - Clear all cache from database.
 
-🗑️ ``deleteValue`` -Deletes a sigle value.
+🗑️ ``QuickCacheFlutter.instance.deleteValue`` -Deletes a sigle value.
 
 ## Additional information
 
