@@ -14,7 +14,7 @@ Manage your cache  securely with a single line of code , without sacrificing per
 
 ## Getting started
 
-You have to initalized ```QuickCaheFlutter``` before runApp(Widget) (Call it after WidgetsFlutterBinding.ensureInitialized()):
+You have to initialized ```QuickCaheFlutter``` before runApp(Widget) (Call it after WidgetsFlutterBinding.ensureInitialized()):
 
 ```
 void main() async {
@@ -28,7 +28,7 @@ void main() async {
 
 📖 ``QuickCacheFlutter.instance.readCache`` - Reads the value for given key
 
-✍️ ``QuickCacheFlutter.instance.setCache`` - Save a sigle key value in database.
+✍️ ``QuickCacheFlutter.instance.setCache`` - Save a single key value in database.
 
 🧹 ``QuickCacheFlutter.instance.removeAllCache`` - Clear all cache from database.
 
