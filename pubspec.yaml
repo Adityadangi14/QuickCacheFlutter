@@ -1,7 +1,9 @@
 name: quick_cache_flutter
-description: A new Flutter package project.
-version: 1.0.1
-homepage:
+description: Manage your cache  securely with a single line of code , without sacrificing performance.
+version: 1.0.1+1
+repository: https://github.com/Adityadangi14/QuickCacheFlutter
+documentation: https://github.com/Adityadangi14/QuickCacheFlutter/blob/main/README.md
+issue_tracker: https://github.com/Adityadangi14/QuickCacheFlutter/issues
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
