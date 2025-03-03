@@ -4,4 +4,6 @@
 
 ## [1.0.2] - minor yaml upadte 
 
+## [2.0.0] - GlobalCacheSettingParams introduced.
+
 * Added more documentation

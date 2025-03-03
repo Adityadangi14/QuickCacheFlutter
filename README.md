@@ -1,10 +1,9 @@
 ## 🚀 Quick Cache Flutter 
 
-📢 **Breaking Changes**
-```
-The method QuickCacheFlutter.instance.init is deprecated. 
-Use QuickCacheFlutter.init instead.
-```
+> **Breaking Changes**
+> 
+> The method `QuickCacheFlutter.instance.init` is deprecated.  
+> Use `QuickCacheFlutter.init` instead.
 
 ## Features
 
