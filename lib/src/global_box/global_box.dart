@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:developer';
 
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,7 +14,7 @@ class GlobalBox {
   GetSecureStorageInstance getSecureStorageInstance =
       GetSecureStorageInstance.instance;
 
-  Future<Box> getGlobalBox() async {
+  Future<(Box, Box)> getGlobalBox() async {
     Directory dir = await getTemporaryDirectory();
     Hive.init(dir.path);
     var encryptionKey = base64Url.decode(await getSecureStorageInstance
@@ -21,7 +22,15 @@ class GlobalBox {
             .read(key: 'encryptionKey') ??
         '');
 
-    return Hive.openBox('global_box',
+    assert(encryptionKey != [],
+        "No encryption key found, make sure cache is properly initlized");
+
+    Box globalBox = await Hive.openBox('global_box',
         encryptionCipher: HiveAesCipher(encryptionKey));
+
+    Box accessCountBox = await Hive.openBox('access_count_box',
+        encryptionCipher: HiveAesCipher(encryptionKey));
+
+    return (globalBox, accessCountBox);
   }
 }
