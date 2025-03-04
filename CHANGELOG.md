@@ -6,4 +6,5 @@
 
 ## [2.0.0] - GlobalCacheSettingParams introduced.
 
-* Added more documentation
+## [2.0.1] - Minor formatting changes.
+

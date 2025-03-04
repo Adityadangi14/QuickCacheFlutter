@@ -1,6 +1,6 @@
 name: quick_cache_flutter
 description: Manage your cache  securely with a single line of code , without sacrificing performance.
-version: 2.0.0
+version: 2.0.1
 repository: https://github.com/Adityadangi14/QuickCacheFlutter
 documentation: https://github.com/Adityadangi14/QuickCacheFlutter/blob/main/README.md
 issue_tracker: https://github.com/Adityadangi14/QuickCacheFlutter/issues
