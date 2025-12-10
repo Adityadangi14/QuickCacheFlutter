@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quick_cache_flutter/src/get_secure_storage_instance.dart';
@@ -16,7 +15,7 @@ class GlobalBox {
   Future<(Box, Box)> getGlobalBox() async {
     Directory dir = await getTemporaryDirectory();
     Hive.init(dir.path);
-    var encryptionKey = base64Url.decode(await getSecureStorageInstance
+    var encryptionKey = base64Decode(await getSecureStorageInstance
             .secureStorage
             .read(key: 'encryptionKey') ??
         '');
@@ -32,4 +31,5 @@ class GlobalBox {
 
     return (globalBox, accessCountBox);
   }
+  
 }

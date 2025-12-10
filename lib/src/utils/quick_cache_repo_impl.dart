@@ -13,66 +13,108 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
     required this.globalCacheSettingParams,
   });
 
+  final Map<String, dynamic> _memoryCache = {};
+
   @override
   Future<dynamic> readCache({required String key}) async {
     try {
       final (Box, Box) box = await GlobalBox.instance.getGlobalBox();
-      Box encryptedBox = box.$1;
-      final Map<dynamic, dynamic>? value = encryptedBox.get(key);
+      final Box encryptedBox = box.$1;
+      final Box accessCountBox = box.$2;
+
+      final memoryValue = _memoryCache[key];
+
+      if (memoryValue != null) {
+        final DateTime? expiry = memoryValue['expiryDuration'] as DateTime?;
+        final DateTime settingDateTime =
+            memoryValue['currentDateTime'] as DateTime;
+        if (expiry != null && expiry.isBefore(DateTime.now())) {
+          _memoryCache.remove(key);
+          encryptedBox.delete(key);
+          LFURemoval.deleteAccCount(accessCountBox, key);
+          return null;
+        }
+
+        final Duration? globalDuration =
+            globalCacheSettingParams?.globalExpiryDuration;
+
+        if (globalDuration != null) {
+          final globalExpiry = settingDateTime.add(globalDuration);
+
+          if (globalExpiry.isBefore(DateTime.now())) {
+            _memoryCache.remove(key);
+            encryptedBox.delete(key);
+            LFURemoval.deleteAccCount(accessCountBox, key);
+            return null;
+          }
+        }
+
+        LFURemoval.incAccessCount(accessCountBox, key);
+        return jsonDecode(memoryValue["value"]);
+      }
+
+      final Map<dynamic, dynamic>? value =
+          encryptedBox.get(key) as Map<dynamic, dynamic>?;
 
       if (value == null) return null;
 
-      final expiry = value['expiryDuration'] as DateTime?;
+      final DateTime? expiry = value['expiryDuration'] as DateTime?;
+      final DateTime settingDateTime = value['currentDateTime'] as DateTime;
 
-      if (expiry == null) return value["value"];
-
-      if (expiry.isBefore(DateTime.now())) {
+      if (expiry != null && expiry.isBefore(DateTime.now())) {
         encryptedBox.delete(key);
-        LFURemoval.deleteAccCount(box.$2, key);
+        LFURemoval.deleteAccCount(accessCountBox, key);
         return null;
       }
 
       final Duration? globalDuration =
           globalCacheSettingParams?.globalExpiryDuration;
 
-      final settingDateTime = value["currentDateTime"] as DateTime;
-
       if (globalDuration != null) {
-        final globalExpieryTime = settingDateTime.add(globalDuration);
+        final globalExpiry = settingDateTime.add(globalDuration);
 
-        if (globalExpieryTime.isBefore(DateTime.now())) {
+        if (globalExpiry.isBefore(DateTime.now())) {
           encryptedBox.delete(key);
-          LFURemoval.deleteAccCount(box.$2, key);
-
+          LFURemoval.deleteAccCount(accessCountBox, key);
           return null;
         }
       }
 
-      LFURemoval.incAccessCount(box.$2, key);
+      _memoryCache[key] = value;
 
-      var val = jsonDecode(value["value"]);
+      LFURemoval.incAccessCount(accessCountBox, key);
 
-      return val;
+      return jsonDecode(value["value"]);
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  void setCache(
-      {required key, required value, Duration? expiryDuration}) async {
+  Future<void> setCache({
+    required String key,
+    required dynamic value,
+    Duration? expiryDuration,
+  }) async {
     try {
       final (Box, Box) box = await GlobalBox.instance.getGlobalBox();
-      Box encryptedBox = box.$1;
+      final Box encryptedBox = box.$1;
+      final Box accessCountBox = box.$2;
 
-      await encryptedBox.put(key, {
+      final DateTime now = DateTime.now();
+
+      final Map<String, dynamic> cachePayload = {
         "value": json.encode(value),
         "expiryDuration":
-            expiryDuration != null ? DateTime.now().add(expiryDuration) : null,
-        "currentDateTime": DateTime.now(),
-      });
+            expiryDuration != null ? now.add(expiryDuration) : null,
+        "currentDateTime": now,
+      };
 
-      LFURemoval.incAccessCount(box.$2, key);
+      await encryptedBox.put(key, cachePayload);
+
+      _memoryCache[key] = cachePayload;
+
+      LFURemoval.incAccessCount(accessCountBox, key);
     } catch (e) {
       rethrow;
     }
@@ -84,6 +126,7 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
     Box encryptedBox = box.$1;
 
     encryptedBox.clear();
+    _memoryCache.clear();
   }
 
   @override
@@ -92,6 +135,7 @@ class QuickCacheRepoImpl implements QuickCacheRepo {
     Box encryptedBox = box.$1;
 
     encryptedBox.delete(key);
+    _memoryCache.remove(key);
     LFURemoval.deleteAccCount(box.$2, key);
   }
 }
